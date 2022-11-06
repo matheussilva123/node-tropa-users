@@ -9,7 +9,7 @@ CREATE TABLE usuarios (
 );
 
 CREATE TABLE enderecos_usuarios (
-    id_endereco_usuario int NOT NULL AUTO_INCREMENT,
+    id_endereco int NOT NULL AUTO_INCREMENT,
     id_usuario int NOT NULL,
     logradouro VARCHAR(255) NOT NULL,
     numero VARCHAR(45) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE enderecos_usuarios (
     cep VARCHAR(45) NOT NULL,
     bairro VARCHAR(255) NOT NULL,
     complemento VARCHAR(30) NULL,
-    PRIMARY KEY (id_endereco_usuario),
+    PRIMARY KEY (id_endereco),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 

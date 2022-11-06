@@ -1,11 +1,14 @@
 import { User } from "src/user/model/user";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: "enderecos_usuarios"})
 export class Address {
 
     @PrimaryGeneratedColumn()
-    id_endereco_usuario: number;
+    id_endereco: number;
+
+    @Column({name: 'id_usuario'})
+    id_usuario: number;
 
     @Column({name: 'logradouro'})
     logradouro: string;
@@ -29,6 +32,7 @@ export class Address {
     complemento: string;
     
     @ManyToOne(() => User, user => user.address)
+    @JoinColumn({ name: "id_usuario" })
     user: User;
 
 }

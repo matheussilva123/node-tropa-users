@@ -9,7 +9,7 @@ export class User {
 
     @Column({name: 'nome'})
     nome: string;
-
+    
     @Column({name: 'sobrenome'})
     sobrenome: string;
 
@@ -23,6 +23,6 @@ export class User {
     cpf: string;
     
     @OneToMany(() => Address, address => address.user)
-    address: Address[];
+    address?: Address[];
 
 }
