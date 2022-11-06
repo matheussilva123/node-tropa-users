@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Address } from "src/address/model/address";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: "usuarios"})
 export class User {
@@ -6,18 +7,22 @@ export class User {
     @PrimaryGeneratedColumn()
     id_usuario: number;
 
-    @Column()
+    @Column({name: 'nome'})
     nome: string;
 
-    @Column()
+    @Column({name: 'sobrenome'})
     sobrenome: string;
 
-    @Column()
+    @Column({name: 'email', unique: true})
     email: string;
 
-    @Column()
+    @Column({name: 'telefone'})
     telefone: string;
 
-    @Column()
+    @Column({name: 'cpf', unique: true})
     cpf: string;
+    
+    @OneToMany(() => Address, address => address.user)
+    address: Address[];
+
 }

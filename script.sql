@@ -2,9 +2,9 @@ CREATE TABLE usuarios (
     id_usuario int NOT NULL AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
     sobrenome VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
     telefone VARCHAR(45) NOT NULL,
-    cpf VARCHAR(45) NOT NULL,
+    cpf VARCHAR(45) NOT NULL UNIQUE,
     PRIMARY KEY (id_usuario)
 );
 
@@ -24,12 +24,12 @@ CREATE TABLE enderecos_usuarios (
 
 INSERT INTO usuarios (nome, sobrenome, email, telefone, cpf)
 VALUES ('Deco', 'Tropa', 'deco@tropadigital.com.br', '11999999999', '11111111111'),
-    ('Raspinha', 'Tropa', 'raspinha@tropadigital.com.br', '11999999991', '11111111112'),
-    ('Branco', 'Tropa', 'branco@tropadigital.com.br', '11999999992', '11111111113'),
-    ('PaacLee', 'Tropa', 'paacLee@tropadigital.com.br', '11999999993', '11111111114'),
-    ('Gustavo', 'Tropa', 'gustavo@tropadigital.com.br', '11999999994', '11111111115'),
-    ('Gonza', 'Tropa', 'gonza@tropadigital.com.br', '11999999995', '11111111116'),
-    ('Danilo', 'Tropa', 'danilo@tropadigital.com.br', '11999999996', '11111111117');
+('Raspinha', 'Tropa', 'raspinha@tropadigital.com.br', '11999999991', '11111111112'),
+('Branco', 'Tropa', 'branco@tropadigital.com.br', '11999999992', '11111111113'),
+('PaacLee', 'Tropa', 'paacLee@tropadigital.com.br', '11999999993', '11111111114'),
+('Gustavo', 'Tropa', 'gustavo@tropadigital.com.br', '11999999994', '11111111115'),
+('Gonza', 'Tropa', 'gonza@tropadigital.com.br', '11999999995', '11111111116'),
+('Danilo', 'Tropa', 'danilo@tropadigital.com.br', '11999999996', '11111111117');
 
 INSERT INTO enderecos_usuarios (id_usuario, logradouro, numero, cidade, uf, cep, bairro)
 VALUES (1, 'Rua da Joana', '1', 'Rio de Janeiro', 'SP', '05159444', 'Pirituba'),
