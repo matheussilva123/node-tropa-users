@@ -1,5 +1,5 @@
 export class UserDTO {
-    readonly id_usuario: number;
+    readonly id_usuario?: number;
     readonly nome: string;
     readonly sobrenome: string;
     readonly email: string;
