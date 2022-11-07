@@ -1,14 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Catch, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { AddressService } from 'src/address/service/address.service';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { UserDTO } from '../dto/users.dto';
 import { UserCpfExistsException } from '../exception/user.cpf.exists.exception';
+import { UserEmailOrCpfExists } from '../exception/user.email.cpf.exists.exception';
 import { UserEmailExistsException } from '../exception/user.email.exists.exception';
 import { UserNotFoundException } from '../exception/user.not.found.exception';
 import { User } from '../model/user';
-import { convertUserDTOToUser } from '../utils/converter';
+import { convertUserDTOToUser, convertUserToUserDTO } from '../utils/converter';
 
 @Injectable()
 export class UserService {
@@ -30,14 +31,14 @@ export class UserService {
     return await paginate<User>(this.userRepository, paginationOptions);
   }
 
-  async create(user: UserDTO): Promise<void> {
-    if (await this.checkIfTheEmailExists(user.email)) {
+  async create(userDTO: UserDTO): Promise<void> {
+    if (await this.checkIfTheEmailExists(userDTO.email)) {
       throw new UserEmailExistsException();
     }
-    if (await this.checkIfTheCpfExists(user.cpf)) {
+    if (await this.checkIfTheCpfExists(userDTO.cpf)) {
       throw new UserCpfExistsException();
     }
-    await this.userRepository.save(user);
+    await this.userRepository.save(userDTO);
   }
 
   async delete(userId: number): Promise<void> {
@@ -47,6 +48,58 @@ export class UserService {
     (await address).map(address => this.addressService.delete(address));
 
     await this.userRepository.delete(userDTO);
+  }
+
+  async update(userId: number, userDTO: UserDTO): Promise<UserDTO> {
+    await this.findOne(userId);
+
+    if(await this.checkIfTheAnotherCpfExists(userDTO.cpf, userId)) {
+      throw new UserCpfExistsException();
+    }
+
+    if(await this.checkIfTheAnotherEmailExists(userDTO.email, userId)) {
+      throw new UserEmailExistsException();
+    }
+
+    await this.userRepository.update({id_usuario: userId}, convertUserDTOToUser(userDTO));
+    return this.findOne(userId);
+      
+  }
+
+  private async checkIfTheAnotherCpfExists(cpf: string, userId: number): Promise<boolean> {
+    const user = await this.userRepository.findOne({
+      where: {
+        cpf
+      }
+    });
+          
+    if(user == null || user == undefined) {
+      return false;
+    }
+
+    if(user.id_usuario === userId) {
+      return false;
+    }
+
+    return true;
+  }
+
+  private async checkIfTheAnotherEmailExists(email: string, userId: number): Promise<boolean> {
+    const user = await this.userRepository.findOne({
+      where: {
+        email
+      }
+    });
+
+    if(user == null || user == undefined) {
+      return false;
+    }
+
+    if(user.id_usuario === userId) {
+      return false;
+    }
+
+    return true;
   }
 
   private async checkIfTheCpfExists(cpf: string): Promise<boolean> {

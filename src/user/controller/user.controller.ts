@@ -1,4 +1,4 @@
-import { Body, Controller, DefaultValuePipe, Delete, Get, HttpCode, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
+import { Body, Controller, DefaultValuePipe, Delete, Get, HttpCode, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { UserDTO } from '../dto/users.dto';
 import { User } from '../model/user';
@@ -10,7 +10,7 @@ export class UserController {
 
   @Get(':id')
   findOne(
-    @Param('id')
+    @Param('id', ParseIntPipe)
     id: number
   ): Promise<UserDTO> {
     return this.userService.findOne(id);
@@ -30,8 +30,14 @@ export class UserController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
+  remove(@Param('id', ParseIntPipe) id: number) {
     return this.userService.delete(id);
+  }
+
+  @Put(':id')
+  update(@Param('id', ParseIntPipe)id: number,
+         @Body() userDTO: UserDTO): Promise<UserDTO> {
+    return this.userService.update(id, userDTO); 
   }
 
 }

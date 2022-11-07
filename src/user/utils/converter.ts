@@ -11,3 +11,15 @@ export function convertUserDTOToUser(userDTO: UserDTO): User {
         cpf: userDTO.cpf
     }
 }
+
+export function convertUserToUserDTO(user: User): UserDTO {
+    return {
+        id_usuario: user.id_usuario,
+        nome: user.nome,
+        sobrenome: user.sobrenome,
+        email: user.email,
+        telefone: user.telefone,
+        cpf: user.cpf
+    }
+}
+

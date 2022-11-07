@@ -1,9 +1,10 @@
+import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "src/user/model/user";
 import { Repository } from "typeorm";
 import { Address } from "../model/address";
 
-
+@Injectable()
 export class AddressService {
     constructor(
         @InjectRepository(Address)
