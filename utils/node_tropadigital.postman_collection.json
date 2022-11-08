@@ -1,0 +1,263 @@
+{
+	"info": {
+		"_postman_id": "bb195369-d916-4f86-a371-4367338a0484",
+		"name": "Node Tropa Digital",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Listar todos os usuários cadastrados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/usuarios?page=1&limit=5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"usuarios"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar usuário especificado via ur",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/usuarios/1000",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"usuarios",
+								"1000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar um novo usuário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Deco\",\n    \"sobrenome\": \"da Tropa\",\n    \"email\": \"deco@tropadigital.com.br\",\n    \"telefone\": \"11987798789\",\n    \"cpf\": \"444314897646\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/usuarios",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remover usuário especificado via url",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/usuarios/8",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"usuarios",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar usuário especificado via url",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Deco\",\n    \"sobrenome\": \"das Tropas\",\n    \"email\": \"branco@tropadigital.com.br\",\n    \"telefone\": \"11987798789\",\n    \"cpf\": \"1646544\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/usuarios/5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"usuarios",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Address",
+			"item": [
+				{
+					"name": "Listar endereço especificado via url",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/enderecos-usuario/0000",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"enderecos-usuario",
+								"0000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar todos os endereços de acordo com o usuário especificado via url",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/enderecos-usuario/users/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"enderecos-usuario",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar um novo endereço",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id_usuario\": 1,\n        \"logradouro\": \"Rua da Joana\",\n        \"numero\": \"1\",\n        \"cidade\": \"Rio de Janeiro\",\n        \"uf\": \"SP\",\n        \"cep\": \"05159444\",\n        \"bairro\": \"Pirituba\",\n        \"complemento\": \"Rua da Joana\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/enderecos-usuario",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"enderecos-usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar endereço especificado via url",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"logradouro\": \"Rua da Joana\",\n    \"numero\": \"1\",\n    \"cidade\": \"Rio de \",\n    \"uf\": \"SP\",\n    \"cep\": \"05159444\",\n    \"bairro\": \"Pirituba\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/enderecos-usuario/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"enderecos-usuario",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remover endereço especificado via url",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/enderecos-usuario/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"enderecos-usuario",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
