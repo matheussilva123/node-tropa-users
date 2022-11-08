@@ -5,11 +5,10 @@ import { AddressService } from 'src/address/service/address.service';
 import { Not, Repository } from 'typeorm';
 import { UserDTO } from '../dto/users.dto';
 import { UserCpfExistsException } from '../exception/user.cpf.exists.exception';
-import { UserEmailOrCpfExists } from '../exception/user.email.cpf.exists.exception';
 import { UserEmailExistsException } from '../exception/user.email.exists.exception';
 import { UserNotFoundException } from '../exception/user.not.found.exception';
 import { User } from '../model/user';
-import { convertUserDTOToUser, convertUserToUserDTO } from '../utils/converter';
+import { convertUserDTOToUser} from '../utils/converter';
 
 @Injectable()
 export class UserService {

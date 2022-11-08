@@ -28,8 +28,8 @@ export class Address {
     @Column({name: 'bairro'})
     bairro: string;
 
-    @Column({name: 'logradouro'})
-    complemento: string;
+    @Column({name: 'complemento'})
+    complemento?: string;
     
     @ManyToOne(() => User, user => user.address)
     @JoinColumn({ name: "id_usuario" })
