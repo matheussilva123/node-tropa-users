@@ -3,9 +3,6 @@
 ## What does it do?
 User and address manipulation by http
 
-
-
-
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
