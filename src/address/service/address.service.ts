@@ -43,6 +43,12 @@ export class AddressService {
         });
     }
 
+    async deleteById(id_endereco: number): Promise<void> {
+        await this.findOne(id_endereco);
+
+        await this.addressRepository.delete(id_endereco);
+    }
+
     async delete(address: Address): Promise<void> {
         await this.addressRepository.delete(address);
     }
@@ -50,6 +56,13 @@ export class AddressService {
     async create(addressDTO: AddressDTO): Promise<AddressDTO> {
         await this.userService.findOne(addressDTO.id_usuario);
         return this.addressRepository.save(addressDTO)
+    }
+
+    async update(id_endereco: number, addressDTO: AddressDTO): Promise<AddressDTO> {
+        await this.findOne(id_endereco);
+        await this.addressRepository.update({id_endereco}, addressDTO); 
+    
+        return await this.findOne(id_endereco);
     }
 
 }

@@ -62,7 +62,6 @@ export class UserService {
 
     await this.userRepository.update({id_usuario: userId}, convertUserDTOToUser(userDTO));
     return this.findOne(userId);
-      
   }
 
   private async checkIfTheAnotherCpfExists(cpf: string, userId: number): Promise<boolean> {
